@@ -4,40 +4,69 @@ lab:
   exercise: Exercise 1 - Create a custom sensitive information type
 ---
 
-## WWL-Mandanten – Nutzungsbedingungen
+# Qualifikationsaufgabe
 
-Wenn Ihnen im Rahmen einer Präsenzschulung ein Mandant zugewiesen worden ist, steht dieser für Praxislabs innerhalb der Präsenzschulung zur Verfügung.
+Ihre Aufgabe besteht darin, Vertraulichkeitsbezeichnungen in Ihrer Organisation zu erstellen und zu veröffentlichen, die vertrauliche Daten entsprechend ihrer Vertraulichkeitsstufe und den erforderlichen Zugriffskontrollen klassifiziert und schützt.
 
-Mandanten sollten nicht für Zwecke außerhalb von Praxislabs freigegeben oder verwendet werden. Der in diesem Kurs verwendete Mandant ist ein Testmandant; er kann nach Abschluss des Kurses nicht verwendet oder erreicht werden und ist nicht für Erweiterungen geeignet.
+**Task:**
 
-Mandanten dürfen nicht in ein kostenpflichtiges Abonnement konvertiert werden. Die im Rahmen dieses Kurses erworbenen Mandanten verbleiben im Eigentum der Microsoft Corporation, und wir behalten uns das Recht vor, jederzeit auf Mandanten zuzugreifen und diese zurückzuziehen.
+- Benutzerdefinierten Typ für vertrauliche Informationen erstellen
 
-# Qualifikationsaufgaben
+## Aufgabe – Erstellen eines benutzerdefinierten Typs für sensible Informationen
 
-Ihre Aufgabe besteht darin, einen benutzerdefinierten vertraulichen Informationstyp (SIT) zu erstellen, der die erforderlichen Kriterien erfüllt:
+In dieser Aufgabe erstellen Sie einen neuen benutzerdefinierten sensiblen Informationstyp, der das Muster der Mitarbeitenden-IDs in der Nähe der Schlüsselwörter "Mitarbeitender" und "ID" erkennt.
 
-- **Benutzerdefiniertes Regex-Muster für Mitarbeiter-ID**: Fügen Sie ein regex-Muster hinzu, das die eindeutige Mitarbeiter-ID-Konfiguration Ihrer Organisation identifiziert, die aus 9 Zeichen besteht: 3 Ziffern, ein Gedankenstrich, gefolgt von 5 Buchstaben (z. B. 123-abcde).
-- **Schlüsselwortliste, die Mitarbeiter-IDs zugeordnet ist**: Integrieren Sie eine Liste von Schlüsselwörtern, die häufig mit Mitarbeiter-IDs verknüpft sind, um die Erkennungsgenauigkeit zu verbessern.
+1. Navigieren Sie in **Microsoft Edge** zu **`https://purview.microsoft.com`** und melden Sie sich beim Microsoft Purview-Portal als die bzw. der Benutzende an, die bzw. den Sie in einer früheren Aufgabe als **Complianceadministrator** festgelegt haben.
 
-## Aufgabe 1 – Erstellen Sie einen vertraulichen Informationstyp
+1. Wählen Sie in der linken Seitenleiste **Lösungen** und dann **Informationsschutz**.
 
-1. Rufen Sie das Microsoft Purview Compliance-Portal auf.
-1. Erweitern Sie die **Datenklassifizierung** und wählen Sie dann **Klassifizierungen** aus.
-1. Wählen Sie **Typen vertraulicher Informationen** aus und wählen Sie dann **+Vertraulichen Informationstyp** erstellen.
-1. Geben Sie auf der Seite **Benennen Sie Ihren vertraulichen Informationstyp** einen aussagekräftigen **Namen** und eine **Beschreibung** ein und wählen Sie dann **Weiter**.
+1. Erweitern Sie in der linken Seitenleiste **Klassifizierer** und wählen Sie dann **Typen vertraulicher Informationen**.
+
+1. Auf der Seite **Typen vertraulicher Informationen** wählen Sie **+ Typ vertraulicher Informationen erstellen**, um die Konfiguration des Typs vertraulicher Informationen zu starten.
+
+1. Geben Sie auf der Seite **Benennen Sie den Typ Ihrer vertraulichen Informationen** ein:
+
+    - **Name**: `Contoso Employee IDs`
+    - **Beschreibung:** `Pattern for Contoso employee IDs.`
+
+1. Wählen Sie **Weiter** aus.
+
 1. Wählen Sie auf der Seite **Muster für diesen vertraulichen Informationstyp definieren** die Option **Muster erstellen** aus.
-1. Auf der Seite **Neues Muster** wählen Sie **+ Primärelement hinzufügen** > **Regulärer Ausdruck**.
-1. Geben Sie auf der Seite **Einen regulären Ausdruck hinzufügen** dem regulären Ausdruck einen aussagekräftigen Namen für **ID** und geben Sie `\d{3}-[a-zA-Z]{5}` in das Feld **Regulärer Ausdruck** ein, was den Anforderungen der Organisation entspricht. Wählen Sie **Fertig** nach Abschluss aus.
-1. Zurück auf der Seite **Neues Muster** unter **Unterstützende Elemente** wählen Sie **+ Unterstützende Elemente oder Elementgruppe hinzufügen** > **Schlüsselwortliste**.
-1. Geben Sie auf der Seite **Schlüsselwortliste hinzufügen** Ihrer Schlüsselwortliste eine aussagekräftige **ID**. Geben Sie in der **Schlüsselwortgruppe Nr. 1** unter **Groß-/Kleinschreibung nicht beachtet** Folgendes ein:
-   - `Employee ID`
-   - `Staff number`
-   - `Work ID`
-1. Wählen Sie **Fertig** nach Abschluss aus.
-1. Wählen Sie auf der Seite **Neues Muster** die Option **Erstellen** aus.
-1. Wählen Sie **Weiter** auf der Seite **Muster für diesen vertraulichen Informationstyp definieren** aus.
-1. Lassen Sie auf der Seite **Wählen Sie die empfohlene Konfidenzstufe für die Anzeige in den Konformitätsrichtlinien** die Standardeinstellung ausgewählt und wählen Sie dann **Weiter**.
-1. Überprüfen Sie Ihre Einstellungen, und wählen Sie dann **Erstellen** aus.
-1. Wählen Sie auf der Seite **Ihr vertraulicher Informationstyp ist erstellt** die Option **Fertig**.
 
-Sie haben nun erfolgreich einen benutzerdefinierten vertraulichen Informationstyp (SIT) erstellt, um die Sicherheit und Verwaltung der eindeutigen Mitarbeiter-ID-Nummern Ihres Unternehmens zu verbessern.
+1. Wählen Sie im Bedienfeld **Neues Muster** auf der rechten Seite **+ Primärelement hinzufügen** > **Regulärer Ausdruck**.
+
+1. Geben Sie im Flyout-Bedienfeld **+ Einen regulären Ausdruck hinzufügen** auf der rechten Seite ein:
+
+    - **ID**: `Contoso IDs`
+    - **Regulärer Ausdruck**: `[A-Z]{3}[0-9]{6}`
+    - Wählen Sie die Optionsschaltfläche für *Zeichenfolgenübereinstimmung*
+
+1. Wählen Sie **Erledigt** am unteren Rand des Flyout-Bedienfelds.
+
+1. Zurück auf dem Flyout-Bedienfeld **Neues Muster** wählen Sie unter **Unterstützende Elemente** das Dropdownmenü **+ Unterstützende Elemente oder Elementgruppen hinzufügen** und wählen Sie **Schlüsselwortliste** aus.
+
+1. Auf dem Flyout-Bedienfeld **Schlüsselwortliste hinzufügen** auf der rechten Seite, geben Sie ein:
+
+    - **ID**: `Employee ID keywords`
+    - **Keine Beachtung von Groß-/Kleinschreibung**:
+
+       ```text
+       Employee
+       ID
+       ```
+
+    - Wählen Sie die Optionsschaltfläche für *Wortübereinstimmung*
+
+1. Wählen Sie **Erledigt** am unteren Rand des Flyout-Bedienfelds.
+
+1. Verringern Sie im Flyout-Bedienfeld **Neues Muster** unter **Zeichennähe** den Wert **Erkennen Sie primäre UND unterstützende Elemente** auf `100` Zeichen.
+
+1. Wählen Sie die Schaltfläche **Erstellen** am unteren Rand des Flyout-Bedienfeldes.
+
+1. Zurück auf der Seite **Muster für diesen sensiblen Informationstyp definieren** wählen Sie **Weiter**.
+
+1. Verwenden Sie auf der Seite **Wählen Sie die empfohlene Stufe für die Anzeige in den Konformitätsrichtlinien** den Standardwert und wählen Sie **Weiter**.
+
+1. Überprüfen Sie auf der Seite **Einstellungen überprüfen und fertigstellen** die Einstellungen, und wählen Sie **Erstellen** aus. Wenn sie erfolgreich erstellt wurde, wählen Sie **Fertig** aus.
+
+Sie haben erfolgreich einen neuen sensiblen Informationstyp erstellt, um Mitarbeitende-IDs im Muster von drei Großbuchstaben, sechs Zahlen und den Schlüsselwörtern 'Mitarbeitender' oder 'IDs' innerhalb eines Bereichs von 100 Zeichen zu identifizieren.
