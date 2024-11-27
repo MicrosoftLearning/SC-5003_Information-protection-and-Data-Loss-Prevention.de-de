@@ -19,8 +19,8 @@ In dieser Übung konfigurieren Sie Ihre Umgebung und bereiten sie für Verwaltun
 **Aufgaben:**
 
 - Aktivieren der Überwachung im Microsoft Purview-Portal
-- Aktivieren Sie die Suche nach Namen in Microsoft Teams
-- Aktivieren Sie Informationsbarrieren in Microsoft SharePoint Online und OneDrive.
+- Zuweisen von Konformitätsrollen
+- Erkunden des Microsoft Purview-Portals
 
 ## Aufgabe – Aktivieren der Überwachung im Microsoft Purview-Portal
 
