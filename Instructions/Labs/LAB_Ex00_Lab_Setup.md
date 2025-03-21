@@ -40,6 +40,19 @@ In dieser Aufgabe aktivieren Sie die Überwachung im Microsoft Purview-Portal, u
 
 1. Sobald Sie diese Option wählen, sollte der blaue Balken von dieser Seite verschwinden.
 
+>[!alert] Wenn in dieser Übung ein Fehler beim Aktivieren der Überwachung angezeigt wird, führen Sie die folgenden Schritte aus:
+>1. Öffnen Sie ein Terminalfenster mit erhöhten Berechtigungen, indem Sie mit der rechten Maustaste auf die Windows-Schaltfläche klicken und dann „Terminal“ (Admin) auswählen.
+>1. Installieren Sie das ExchangeOnlineManagement-Modul, indem Sie `Install-Module -Name ExchangeOnlineManagement` ausführen.
+>1. Stellen Sie eine Verbindung zu ExchangeOnlineManagement her, indem Sie `Connect-ExchangeOnline` ausführen.
+>1. Wenn Sie dazu aufgefordert werden, melden Sie sich an, indem Sie den Administratorbenutzernamen und das Kennwort von Ihrem Lab-Hostinganbieter eingeben.
+>1. Um zu überprüfen, ob die Überprüfung aktiviert ist, führen Sie `Get-AdminAuditLogConfig | FL UnifiedAuditLogIngestionEnabled` aus.
+>1. Wenn „false“, dann ist das Überwachungsprotokoll deaktiviert.
+>1. Um die Überprüfung zu aktivieren, führen Sie `Set-AdminAuditLogConfig -UnifiedAuditLogIngestionEnabled $true` aus.
+>   1. Wenn eine Fehlermeldung angezeigt wird, dass Sie das Skript in Ihrer Organisation nicht ausführen können, führen Sie `Enable-OrganizationCustomization` aus.
+>   1. Versuchen Sie es erneut `Set-AdminAuditLogConfig -UnifiedAuditLogIngestionEnabled $true` auszuführen.
+>1. Um zu überprüfen, ob die Überprüfung aktiviert ist, führen Sie `Get-AdminAuditLogConfig | FL UnifiedAuditLogIngestionEnabled` aus.
+>1. Wenn Sie fertig sind, führen Sie `Disconnect-ExchangeOnline` aus, um Ihre Sitzung zu beenden.
+
 Sie haben die Überwachung in Microsoft 365 erfolgreich aktiviert.
 
 ## Aufgabe – Zuweisen von Compliancerollen
