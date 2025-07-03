@@ -17,71 +17,19 @@ Ihre Aufgabe besteht darin, Vertraulichkeitsbezeichnungen in Ihrer Organisation 
 
 ## Aufgabe 1 – Aktivieren der Unterstützung für Vertraulichkeitsbezeichnungen in SharePoint und OneDrive
 
-In dieser Aufgabe installieren Sie die erforderlichen Module und aktivieren die Unterstützung für Vertraulichkeitsbezeichnungen in Ihrem Mandanten. Dies wird für die optionale Aufgabe benötigt, Vertraulichkeitsbezeichnungen später in dieser Übung anzubringen.
+In dieser Aufgabe aktivieren Sie die Co-Authoring-Funktion für Vertraulichkeitsbezeichnungen, die auch Vertraulichkeitsbezeichnungen für Dateien in SharePoint und OneDrive ermöglicht.
 
-1. Öffnen Sie auf dem Desktop ein erweitertes PowerShell-Fenster, indem Sie mit der rechten Maustaste auf die Schaltfläche „Windows" in der Taskleiste klicken und dann **Terminal (Admin)** auswählen.
+1. Öffnen Sie **Microsoft Edge**, und navigieren Sie dann zu `https://purview.microsoft.com`.
 
-1. Bestätigen Sie das Fenster **Benutzerkontensteuerung** mit **Ja**.
+1. Wählen Sie in der linken Navigation **Einstellungen** > **Informationsschutz**.
 
-1. Führen Sie das Cmdlet **Install-Module** aus, um die neueste Version des MS Online PowerShell-Moduls zu installieren:
+1. In den **Einstellungen für den Informationsschutz** stellen Sie sicher, dass Sie sich auf der Registerkarte **Co-Authoring für Dateien mit Vertraulichkeitsbezeichnungen** befinden.
 
-    ```powershell
-    Install-Module -Name MSOnline
-    ```
+1. Aktivieren Sie das Kontrollkästchen für **Ko-Authoring für Dateien mit Vertraulichkeitsbezeichnungen einschalten**.
 
-1. Bestätigen Sie den Nuget-Sicherheitsdialog und den Sicherheitsdialog des nicht vertrauenswürdigen Repositorys mit **Y** für Ja und drücken Sie die EINGABETASTE. Es kann eine Weile dauern, bis der Vorgang abgeschlossen ist.
+1. Wählen Sie **Anwenden** am unteren Rand des Bildschirms.
 
-1. Führen Sie das Cmdlet **Install-Module** aus, um die neueste SharePoint Online PowerShell-Modulversion zu installieren:
-
-    ```powershell
-    Install-Module -Name Microsoft.Online.SharePoint.PowerShell
-    ```
-
-1. Bestätigen Sie den Sicherheitsdialog „Nicht vertrauenswürdiges Repository" mit **Y** für Ja und drücken Sie die EINGABETASTE.
-
-1. Führen Sie **Connect-MsolService** aus, um eine Verbindung mit dem MS Online-Dienst herzustellen:
-
-    ```powershell
-    Connect-MsolService
-    ```
-
-1. Melden Sie sich im Formular **Anmelden in Ihrem Konto** als der Benutzende an, den Sie in einer früheren Übung als **Complianceadministrator** ausgewählt haben.
-
-1. Navigieren Sie nach der Anmeldung zurück zum Terminalfenster.
-
-1. Führen Sie das Cmdlet **Get-Msoldomain** aus und speichern Sie die Domäne als Variable:
-
-    ```powershell
-    $domain = get-msoldomain
-    ```
-
-1. Verwenden Sie die im vorherigen Schritt erstellte Variable _$domain_, um eine neue Variable für _$adminurl_ zu erstellen:
-
-    ```powershell
-    $adminurl = "https://" + $domain.Name.split('.')[0] + "-admin.sharepoint.com"
-    ```
-
-1. Führen Sie das Cmdlet **Connect-SPOService** mithilfe der im vorherigen Schritt erstellten Variablen _$adminurl_ aus:
-
-    ```powershell
-    Connect-SPOService -url $adminurl
-    ```
-
-1. Melden Sie sich im Formular **Anmelden in Ihrem Konto** als **Globaler Administrator** an.
-
-1. Navigieren Sie nach der Anmeldung zurück zum Terminalfenster.
-
-1. Führen Sie das Cmdlet **Set-SPOTenant** aus, um die Unterstützung für Vertraulichkeitsbezeichnungen zu aktivieren:
-
-    ```powershell
-    Set-SPOTenant -EnableAIPIntegration $true
-    ```
-
-1. Bestätigen Sie die Änderungen mit **Y** für Ja und drücken Sie die EINGABETASTE.
-
-1. Schließen Sie das PowerShell-Fenster.
-
-Sie haben erfolgreich die Unterstützung für Vertraulichkeitsbezeichnungen für Teams und SharePoint-Webseiten aktiviert.
+Sie haben erfolgreich den Kundendienst für Vertraulichkeitsbezeichnungen für Dateien in SharePoint und OneDrive aktiviert.
 
 ## Aufgabe 2 – Erstellen von Vertraulichkeitsbezeichnungen
 
