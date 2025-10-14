@@ -114,6 +114,14 @@ In dieser Aufgabe erstellen Sie mithilfe von PowerShell eine DLP-Richtlinie, um 
 
 1. Öffnen Sie auf Ihrem Desktop ein erweitertes PowerShell-Fenster, indem Sie mit der rechten Maustaste auf die Schaltfläche Windows in der Taskleiste klicken und dann **Terminal (Admin)** wählen.
 
+1. Führen Sie das Cmdlet **Install Module** im Terminalfenster aus, um die neueste **Exchange Online PowerShell**-Modulversion zu installieren:
+
+    ```powershell
+    Install-Module ExchangeOnlineManagement
+    ```
+
+1. Bestätigen Sie den Sicherheitsdialog „Nicht vertrauenswürdiges Repository" mit **Y** für Ja und drücken Sie die **Eingabetaste**.  Dieser Vorgang nimmt einige Zeit in Anspruch.
+
 1. Führen Sie das Cmdlet **Connect- IPPSSession** aus, um eine Verbindung mit der Security & Compliance PowerShell herzustellen:
 
    ```powershell
