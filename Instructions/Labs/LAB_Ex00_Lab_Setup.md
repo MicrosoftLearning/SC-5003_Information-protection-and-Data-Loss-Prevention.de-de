@@ -24,71 +24,116 @@ In dieser Übung konfigurieren Sie Ihre Umgebung und bereiten sie für Verwaltun
 
 ## Aufgabe – Aktivieren der Überwachung im Microsoft Purview-Portal
 
-In dieser Aufgabe aktivieren Sie die Überwachung im Microsoft Purview-Portal, um Portalaktivitäten zu überwachen. Für die Aufgaben in diesen Übungen ist die Überwachung erforderlich, um eine Richtlinie für die automatische Bezeichnung zu erstellen.
+In dieser Aufgabe aktivieren Sie die Überwachung im Microsoft Purview-Portal, um Portalaktivitäten zu überwachen.
 
-1. Navigieren Sie in Microsoft Edge zum Microsoft Purview-Portal, `https://purview.microsoft.com`, und melden Sie sich als Benutzender mit **Global Administrator**-Rechten an.
+1. Melden Sie sich mit dem**Admin**-Konto bei der VM Client 1 (SC-401-CL1) an.
 
-1. Auf dem Bildschirm erscheint eine Meldung über das neue Microsoft Purview-Portal. Wählen Sie die Option, um den Bedingungen für die Veröffentlichung des Datenflusses und der Datenschutzerklärung zuzustimmen, und wählen Sie dann **Jetzt testen** aus.
+1. Öffnen Sie Microsoft Edge.
+
+1. Navigieren Sie in**Microsoft Edge** zu`https://purview.microsoft.com`, und melden Sie sich als**MOD-Admin**`admin@WWLxZZZZZZ.onmicrosoft.com` an (wobei ZZZZZZ das eindeutige Präfix Ihres Mandanten ist, das von Ihrem Labhostinganbieter bereitgestellt wird). Das Passwort der administrierenden Person sollte von Ihrem Lab-Hosting-Anbieter bereitgestellt werden.
+
+1. Navigieren Sie in Microsoft Edge zum Microsoft Purview-Portal,`https://purview.microsoft.com`, und melden sich an.
+
+1. Auf dem Bildschirm erscheint eine Meldung über das neue Microsoft Purview-Portal. Wählen Sie**Erste Schritte**, um Zugriff auf das neue Portal zu erhalten.
 
     ![Screenshot des Bildschirms „Willkommen im neuen Microsoft Purview-Portal“.](../Media/welcome-purview-portal.png)
 
-1. Wählen Sie **Lösungen** in der linken Seitenleiste und wählen Sie dann **Überwachen**.
+1. Wählen Sie**Lösungen** in der linken Seitenleiste und wählen Sie dann**Überwachen**.
 
-1. Wählen Sie auf der Seite **Suche** die Leiste **Aufzeichnung von Benutzenden- und Admin-Aktivitäten starten** aus, um die Überwachungsprotokollierung zu aktivieren.
+1. Wählen Sie auf der Seite**Suche** die Leiste**Aufzeichnung von Benutzenden- und Admin-Aktivitäten starten** aus, um die Überwachungsprotokollierung zu aktivieren.
 
     ![Der Screenshot zeigt die Schaltfläche „Aufzeichnung von Benutzenden- und Admin-Aktivitäten starten".](../Media/enable-audit-button.png)
 
 1. Sobald Sie diese Option wählen, sollte der blaue Balken von dieser Seite verschwinden.
 
->[!alert] Wenn in dieser Übung ein Fehler beim Aktivieren der Überwachung angezeigt wird, führen Sie die folgenden Schritte aus:
->1. Öffnen Sie ein Terminalfenster mit erhöhten Berechtigungen, indem Sie mit der rechten Maustaste auf die Windows-Schaltfläche klicken und dann „Terminal“ (Admin) auswählen.
->1. Installieren Sie das ExchangeOnlineManagement-Modul, indem Sie `Install-Module -Name ExchangeOnlineManagement` ausführen.
->1. Stellen Sie eine Verbindung zu ExchangeOnlineManagement her, indem Sie `Connect-ExchangeOnline` ausführen.
->1. Wenn Sie dazu aufgefordert werden, melden Sie sich an, indem Sie den Administratorbenutzernamen und das Kennwort von Ihrem Lab-Hostinganbieter eingeben.
->1. Um zu überprüfen, ob die Überprüfung aktiviert ist, führen Sie `Get-AdminAuditLogConfig | FL UnifiedAuditLogIngestionEnabled` aus.
->1. Wenn „false“, dann ist das Überwachungsprotokoll deaktiviert.
->1. Um die Überprüfung zu aktivieren, führen Sie `Set-AdminAuditLogConfig -UnifiedAuditLogIngestionEnabled $true` aus.
->   1. Wenn eine Fehlermeldung angezeigt wird, dass Sie das Skript in Ihrer Organisation nicht ausführen können, führen Sie `Enable-OrganizationCustomization` aus.
->   1. Versuchen Sie es erneut `Set-AdminAuditLogConfig -UnifiedAuditLogIngestionEnabled $true` auszuführen.
->1. Um zu überprüfen, ob die Überprüfung aktiviert ist, führen Sie `Get-AdminAuditLogConfig | FL UnifiedAuditLogIngestionEnabled` aus.
->1. Wenn Sie fertig sind, führen Sie `Disconnect-ExchangeOnline` aus, um Ihre Sitzung zu beenden.
+    >[!Note] **Hinweis: Wenn die Protokollierung nicht durch die Schaltfläche „Überwachung“ nicht aktiviert:**
+    >
+    >In einigen Mandanten wird die Überwachung möglicherweise nicht durch die Auswahl von**Aufzeichnung von Benutzer- und Administratoraktivitäten starten** aktiviert.  
+    >
+    >In diesem Fall können Sie die Überwachung stattdessen über PowerShell aktivieren:
+    >
+    >1. Öffnen Sie ein Terminalfenster mit erhöhten Rechten, indem Sie mit der rechten Maustaste auf die Windows-Schaltfläche klicken und**Terminal (Administrator)** auswählen.  
+    >
+    >1. Installieren Sie das neueste**Exchange Online PowerShell**-Modul:
+    >
+    >     ```powershell
+    >     Install-Module ExchangeOnlineManagement
+    >     ```
+    >
+    >     Bestätigen Sie alle Eingabeaufforderungen, indem Sie**Y** für „Ja“ (Yes) eingeben und die**EINGABETASTE** drücken.
+    >
+    >1. Führen Sie den folgenden Befehl aus, um Ihre Ausführungsrichtlinie zu ändern:
+    >
+    >     ```powershell
+    >     Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+    >     ```
+    >
+    >1. Schließen Sie das Terminalfenster mit erhöhten Rechten, und öffnen Sie eine normale PowerShell-Sitzung.
+    >
+    >1. So stellen Sie eine Verbindung mit Exchange Online her
+    >
+    >     ```powershell
+    >     Connect-ExchangeOnline
+    >     ```
+    >
+    >    Melden Sie sich als`admin@WWLxZZZZZZ.onmicrosoft.com` an (wobei ZZZZZZ das eindeutige Präfix Ihres Mandanten ist, das von Ihrem Labhostinganbieter bereitgestellt wird). Das Passwort der administrierenden Person sollte von Ihrem Lab-Hosting-Anbieter bereitgestellt werden.
+    >
+    >1. So überprüfen Sie, ob die Überwachung aktiviert ist:
+    >
+    >     ```powershell
+    >     Get-AdminAuditLogConfig | FL UnifiedAuditLogIngestionEnabled
+    >     ```
+    >
+    >    Wenn**_FALSE_** zurückgegeben wird, aktivieren Sie „Überwachung“:
+    >
+    >     ```powershell
+    >     Set-AdminAuditLogConfig -UnifiedAuditLogIngestionEnabled $true
+    >     ```
+    >
+    >1. So vergewissern Sie sich, dass sie jetzt aktiviert ist:
+    >
+    >     ```powershell
+    >     Get-AdminAuditLogConfig | FL UnifiedAuditLogIngestionEnabled
+    >     ```
+    >
+    >    Der Befehl sollte**_TRUE_** zurückgeben, sobald die Überwachung aktiv ist.
 
 Sie haben die Überwachung in Microsoft 365 erfolgreich aktiviert.
 
 ## Aufgabe – Zuweisen von Compliancerollen
 
-In dieser Aufgabe weisen Sie dem Benutzenden, den Sie mithilfe dieser Übungen verwenden werden, den **Complianceadministrator** zu.
+In dieser Aufgabe weisen Sie dem Benutzenden, den Sie mithilfe dieser Übungen verwenden werden, den**Complianceadministrator** zu.
 
-1. Öffnen Sie **Microsoft Edge** und navigieren Sie zum Microsoft 365 Admin Center, `https://admin.microsoft.com`. Sie müssen sich als ein Benutzender anmelden, der **globale Administrator**-Rechte hat.
+1. Öffnen Sie**Microsoft Edge** und navigieren Sie zum Microsoft 365 Admin Center,`https://admin.microsoft.com`. Sie müssen sich als ein Benutzender anmelden, der**globale Administrator**-Rechte hat.
 
-1. Erweitern Sie **Benutzende** in der linken Seitenleiste und wählen Sie dann **Aktive Benutzende**.
+1. Erweitern Sie**Benutzende** in der linken Seitenleiste und wählen Sie dann**Aktive Benutzende**.
 
 1. Wählen oder erstellen Sie einen Benutzenden, um mit diesen Übungen fortzufahren.
 
    Wenn Sie einen vorhandenen Benutzenden verwenden möchten, wählen Sie einen Benutzenden mit minimalen Rechten, um ihm den geringsten Zugriff zu ermöglichen.
 
-   1. Wenn Sie einen neuen Benutzenden anlegen, weisen Sie ihm eine Lizenz zu, die für diese Übungen geeignet ist. Der Benutzende muss über eine Microsoft 365 E5-Lizenz oder ein kompatibles Add-on für diese Übungen verfügen. Weisen Sie dem Benutzenden die Rolle **Complianceadministrator** in den optionalen Einstellungen beim Einrichten des neuen Benutzenden zu und schließen Sie die Erstellung des neuen Benutzenden ab.
+   1. Wenn Sie einen neuen Benutzenden anlegen, weisen Sie ihm eine Lizenz zu, die für diese Übungen geeignet ist. Der Benutzende muss über eine Microsoft 365 E5-Lizenz oder ein kompatibles Add-on für diese Übungen verfügen. Weisen Sie dem Benutzenden die Rolle**Complianceadministrator** in den optionalen Einstellungen beim Einrichten des neuen Benutzenden zu und schließen Sie die Erstellung des neuen Benutzenden ab.
 
-   1. Wenn Sie die Barrierefreiheit eines bestehenden Benutzenden ändern möchten, wählen Sie ihn aus und wählen Sie dann **Rollen verwalten**. Weisen Sie dem Benutzenden die Rolle **Complianceadministrator** zu und speichern Sie Ihre Änderungen.
+   1. Wenn Sie die Barrierefreiheit eines bestehenden Benutzenden ändern möchten, wählen Sie ihn aus und wählen Sie dann**Rollen verwalten**. Weisen Sie dem Benutzenden die Rolle**Complianceadministrator** zu und speichern Sie Ihre Änderungen.
 
-1. Melden Sie sich von dem Konto mit dem Zugriff des globalen Administrators ab, indem Sie das Symbol der bzw. des Benutzenden oben rechts auswählen und dann **Abmelden** auswählen.
+1. Melden Sie sich von dem Konto mit dem Zugriff des globalen Administrators ab, indem Sie das Symbol der bzw. des Benutzenden oben rechts auswählen und dann**Abmelden** auswählen.
 
    Beispiel:
 
    ![Screenshot zeigt den Navigationspfad zur Abmeldung vom MOD-Administratorkonto.](../Media/sign-out.png)
 
-Sie haben einem Benutzenden erfolgreich die Rolle **Complianceadministrator** zugewiesen, die zur Durchführung der verschiedenen Übungen in dieser Übung erforderlich ist.
+Sie haben einem Benutzenden erfolgreich die Rolle**Complianceadministrator** zugewiesen, die zur Durchführung der verschiedenen Übungen in dieser Übung erforderlich ist.
 
 ## Aufgabe – Erkunden des Microsoft Purview-Portals
 
-In dieser Aufgabe melden Sie sich als der Benutzende an, dem Sie zuvor die Rolle **Complianceadministrator** zugewiesen haben, um das Microsoft Purview-Portal zu erkunden. Diese Rolle wird in den nächsten Übungen als Ihr **Complianceadministrator** bezeichnet.
+In dieser Aufgabe melden Sie sich als der Benutzende an, dem Sie zuvor die Rolle**Complianceadministrator** zugewiesen haben, um das Microsoft Purview-Portal zu erkunden. Diese Rolle wird in den nächsten Übungen als Ihr**Complianceadministrator** bezeichnet.
 
-1. Navigieren Sie in **Microsoft Edge** zu **`https://purview.microsoft.com`**.
+1. Navigieren Sie in**Microsoft Edge** zu**`https://purview.microsoft.com`**.
 
-1. Wenn das Fenster **Konto auswählen** angezeigt wird, wählen Sie **Ein anderes Konto verwenden**.
+1. Wenn das Fenster**Konto auswählen** angezeigt wird, wählen Sie**Ein anderes Konto verwenden**.
 
-1. Wenn das Fenster **Anmelden** angezeigt wird, melden Sie sich als der Benutzende an, den Sie zuvor als **Complianceadministrator** ausgewählt haben.
+1. Wenn das Fenster**Anmelden** angezeigt wird, melden Sie sich als der Benutzende an, den Sie zuvor als**Complianceadministrator** ausgewählt haben.
 
 1. Machen Sie sich mit dem neuen Microsoft Purview-Portal vertraut. Wenn Sie fertig sind, lassen Sie das Browserfenster geöffnet.
 
-Sie haben erfolgreich zum Konto des ** Complianceadministrators** gewechselt und sind nun bereit, die Übung zu starten.
+Sie haben erfolgreich zum Konto des** Complianceadministrators** gewechselt und sind nun bereit, die Übung zu starten.
